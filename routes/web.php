@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Crypt;
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json([
+        'msg' => $router->app->version(),
+    ]);
 });
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
@@ -40,10 +42,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->put('users/change-user-apitoken/{id}', 'UserController@changeUserAPIToken');
 
     $router->put('users/{id}', 'UserController@update');
-});
-
-$router->get('crypt/{random32chars}', function ($random32chars) {
-    return response()->json(['body' => Crypt::encrypt($random32chars)]);
 });
 
 $router->get('jobs', 'JobController@index');
