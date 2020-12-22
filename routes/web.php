@@ -47,3 +47,5 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 $router->get('jobs', 'JobController@index');
 
 $router->get('jobs/{id}', 'JobController@show');
+
+$router->post('files', 'FileController@store');
